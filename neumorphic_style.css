@@ -9,12 +9,17 @@ html {
     --main-color: #f0f0f0;
     --light-color: #484848;
     --shadow-color: #101010;
+    --hover-color: #3c3c3c;
+    --principal-color: #83b6e0;
 
-    --shadow-offset: 2px;
+    --shadow-offset: 5px;
     --shadow-blur: 8px;
     --theme-transition: 0.4s;
+    --default-transition: 0.4s;
     --font-name: "Nunito";
     --container-margin: 10%;
+    --section-padding: 20px;
+    --border-radius: 10px;
 } 
 
 .light-theme {
@@ -22,13 +27,15 @@ html {
     --main-color: #414141; 
     --light-color: #fefefe;
     --shadow-color: #b8b8b8;
+    --hover-color: #f2f2f2;
+    --principal-color: #8ec8f7;
 }
 
 body {
-	height: 100vh;
+	min-height: 100vh;
     margin: 0;
 	background-color: var(--bg-color);
-    transition: 0.4s ease;
+    transition: var(--theme-transition) ease;
 }
 
 .container {
@@ -38,25 +45,96 @@ body {
     margin-left: var(--container-margin);
 }
 
+.container * {
+    transition: var(--default-transition) ease;
+    margin: 15px;
+}
+
+.section, .section_inset {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: var(--section-padding);
+    border-radius: var(--border-radius);
+}
+
 .button {
     align-self: center;
     font-family: var(--font-name), sans-serif;
     color: var(--main-color);
     height: 40px;
     width: 100px;
+    cursor: pointer;
     border-radius: 50vmin;
     border-style: none;
     outline: none;
-    color: var(--main-color);
     background-color: var(--bg-color);
+}
+
+.button, .section, .checkboxList_checkbox + label {
     box-shadow: calc(-1*var(--shadow-offset)) calc(-1*var(--shadow-offset)) var(--shadow-blur) var(--light-color),
                  var(--shadow-offset)  var(--shadow-offset) var(--shadow-blur) var(--shadow-color);
 }
 
-.button:hover {
+.button:hover, .checkboxList_checkbox:hover + label {
+    background-color: var(--hover-color);
+}
+
+.section_inset, .button:active, .checkboxList_checkbox:checked + label {
+    color: var(--principal-color);
     box-shadow: inset calc(-1*var(--shadow-offset)) calc(-1*var(--shadow-offset)) var(--shadow-blur) var(--light-color),
                 inset  var(--shadow-offset)  var(--shadow-offset) var(--shadow-blur) var(--shadow-color);
 }
+
+.checkboxList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.checkboxList_item {
+    position: relative;
+    margin: 0;
+}
+
+.checkboxList_checkbox {
+    position: absolute;
+    opacity: 0;
+}
+
+.checkboxList_checkbox + label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: var(--main-color);
+    width: 64px;
+    height: 64px;
+}
+
+.checkboxList_checkbox + .checkboxList_label {
+    border-radius: 50%;
+}
+
+.checkboxList_checkbox + .checkboxList_label_sq {
+    border-radius: var(--border-radius);
+}
+
+.checkboxList_checkbox + label > i {
+    margin: 0px;
+    transition: none;
+    font-size: 32px;
+}
+
+.checkboxList_checkbox:checked + label > i {
+    font-size: 28px;
+    color: var(--principal-color);
+}
+
 
 .display-1, .display-2, .display-3, .display-4, .display-5, .display-6 {
     align-self: center;
